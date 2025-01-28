@@ -1,0 +1,229 @@
+---
+title: "Lab 1"
+author: "Kolton Knight"
+date: "2025-01-24"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Read in data from CSV file, then view, finally attach as default object.
+
+```{r dataframe}
+EPI_data <- read.csv('C:/Users/kolto/Documents/Data Analytics/epi2024results06022024.csv')
+View(EPI_data)
+attach(EPI_data)
+```
+
+Check and Filter NA
+
+```{r NA}
+NAs <- is.na(EPI.new) 
+EPI.new.noNAs <- EPI.new[!NAs]
+```
+
+Summary Stats 2 ways
+
+``` {r summary EPI}
+summary(EPI.new)
+fivenum(EPI.new, na.rm=TRUE)
+```
+
+Stem and Leaf Plot
+```{r s&L EPI}
+stem(EPI.new)
+```
+
+Histogram with sequence specified (Min, Max, Step), Prob = true plots 
+probability densities so total area = 1
+
+```{r hist EPI}
+hist(EPI.new, seq(20., 80., 1.0), prob=TRUE)
+```
+
+
+Histogram with Lines Drawn *Gotta run everything together
+``` {r hist lines EPI}
+hist(EPI.new, seq(20., 80., 1.0), prob=TRUE)
+lines(density(EPI.new, na.rm=TRUE, bw=1.))
+rug(EPI.new)
+```
+
+Histogram with smoother line
+```{r hist smooth line EPI}
+hist(EPI.new, seq(20., 80., 1.0), prob=TRUE)
+lines(density(EPI.new, na.rm=TRUE, bw="SJ"))
+rug(EPI.new)
+```
+
+Fitting two normal distributions in histogram w smooth line
+```{r two norm EPI}
+hist(EPI.new, seq(20., 80., 1.0), prob=TRUE)
+lines(density(EPI.new, na.rm=TRUE, bw="SJ"))
+rug(EPI.new)
+x<-seq(20,80,1)
+q<- dnorm(x,mean=42, sd=5,log=FALSE)
+#lines(x,q)
+lines(x,.4*q)
+q<-dnorm(x,mean=65, sd=5,log=FALSE)
+lines(x,.12*q)
+```
+
+Cumulative Density Function
+
+```{r CDF EPI}
+plot(ecdf(EPI.new), do.points=FALSE, verticals=TRUE)
+```
+
+Quantile-Quantile
+
+```{r Q-Q EPI}
+qqnorm(EPI.new)
+qqline(EPI.new)
+```
+
+Q-Q plot for normal distribution
+``` {r Q-Q norm EPI}
+qqplot(rnorm(250), EPI.new, xlab = "Q-Q plot for norm dsn")
+qqline(EPI.new)
+```
+
+Q-Q plot for t distribution
+``` {r Q-Q t EPI}
+qqplot(rt(250, df = 5), EPI.new, xlab = "Q-Q plot for t dsn")
+qqline(EPI.new)
+```
+
+Summary Stats 2 ways - SPI.new
+
+``` {r summary SPI}
+summary(SPI.new)
+fivenum(SPI.new, na.rm=TRUE)
+```
+Check and Filter NA
+
+```{r NA SPI}
+NAs <- is.na(SPI.new) 
+SPI.new.noNAs <- SPI.new[!NAs]
+```
+
+Stem and Leaf Plot - SPI.new
+```{r s&L SPI}
+stem(SPI.new.noNAs)
+```
+
+Histogram with Lines Drawn - SPI.new
+``` {r hist lines SPI}
+hist(SPI.new.noNAs, seq(-5., 110., 1.0), prob=TRUE)
+lines(density(SPI.new.noNAs, na.rm=TRUE, bw=1.))
+rug(SPI.new.noNAs)
+```
+
+Histogram with Smooth Lines Drawn - SPI.new
+``` {r hist lines smooth SPI}
+hist(SPI.new.noNAs, seq(-5., 110., 1.0), prob=TRUE)
+lines(density(SPI.new.noNAs, na.rm=TRUE, bw='SJ'))
+rug(SPI.new.noNAs)
+```
+
+Fitting uniform distribution in histogram w smooth line
+```{r uniform SPI}
+hist(SPI.new.noNAs, seq(-5., 110., 1.0), prob=TRUE)
+#lines(density(SPI.new.noNAs, na.rm=TRUE, bw="SJ"))
+rug(SPI.new.noNAs)
+x<-seq(-5., 110., 1.0)
+q<- dunif(x,min = 0, max = 100, log=FALSE)
+lines(x,q)
+```
+
+Comparing EPI.new and SPI.new
+``` {r b&w plot SPI}
+boxplot(EPI.new, SPI.new.noNAs)
+```
+
+Cumulative Density Function - SPI
+
+```{r CDF SPI}
+plot(ecdf(SPI.new.noNAs), do.points=FALSE, verticals=TRUE)
+```
+
+Quantile-Quantile - SPi
+
+```{r Q-Q SPI}
+qqnorm(SPI.new.noNAs)
+qqline(SPI.new.noNAs)
+```
+
+Q-Q plot for normal distribution - SPi
+``` {r Q-Q norm SPI}
+qqplot(rnorm(250), SPI.new.noNAs, xlab = "Q-Q plot for norm dsn")
+qqline(SPI.new.noNAs)
+```
+
+Q-Q plot for t distribution - SPi
+``` {r Q-Q t SPI}
+qqplot(rt(250, df = 5), SPI.new.noNAs, xlab = "Q-Q plot for t dsn")
+qqline(SPI.new.noNAs)
+```
+
+Summary Stats 2 ways - TBN.new
+
+``` {r summary TBN}
+summary(TBN.new)
+fivenum(TBN.new, na.rm=TRUE)
+sd(TBN.new, na.rm=TRUE)
+```
+Check and Filter NA
+
+```{r NA TBN}
+NAs <- is.na(TBN.new) 
+TBN.new.noNAs <- TBN.new[!NAs]
+```
+
+Comparing EPI.new and TBN.new
+``` {r b&w plot TBN}
+boxplot(EPI.new, TBN.new.noNAs)
+```
+
+Histogram with Lines Drawn - TBN.new
+``` {r hist lines TBN}
+hist(TBN.new.noNAs, seq(-5., 110., 1.0), prob=TRUE)
+lines(density(TBN.new.noNAs, na.rm=TRUE, bw=1.))
+rug(TBN.new.noNAs)
+```
+
+Fitting uniform distribution in histogram w smooth line - TBN
+```{r uniform TBN}
+hist(TBN.new.noNAs, seq(-5., 110., 1.0), prob=TRUE)
+lines(density(TBN.new.noNAs, na.rm=TRUE, bw="SJ"))
+rug(TBN.new.noNAs)
+x<-seq(-5., 110., 1.0)
+q<- dnorm(x, mean = 52, sd = 30.2679, log=FALSE)
+lines(x,q)
+```
+Cumulative Density Function - TBN.new
+
+```{r CDF TBN}
+plot(ecdf(TBN.new), do.points=FALSE, verticals=TRUE)
+```
+
+Quantile-Quantile - TBN.new
+
+```{r Q-Q TBN}
+qqnorm(TBN.new)
+qqline(TBN.new)
+```
+
+Q-Q plot for normal distribution - TBN.new
+``` {r Q-Q norm TBN}
+qqplot(rnorm(250), TBN.new, xlab = "Q-Q plot for norm dsn")
+qqline(TBN.new)
+```
+
+Q-Q plot for t distribution - TBN.new
+``` {r Q-Q t TBN}
+qqplot(rt(250, df = 5), TBN.new, xlab = "Q-Q plot for t dsn")
+qqline(TBN.new)
+```
