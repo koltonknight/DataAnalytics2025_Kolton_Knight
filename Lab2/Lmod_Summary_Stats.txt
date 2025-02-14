@@ -1,0 +1,59 @@
+> summary(lmod1)
+
+Call:
+lm(formula = PRICE ~ BEDS, data = dataset)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-10291292  -1250146   -920008   -348704  63151543 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)   799199     114861   6.958 4.18e-12 ***
+BEDS          349753      25650  13.636  < 2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 4082000 on 3176 degrees of freedom
+Multiple R-squared:  0.05531,	Adjusted R-squared:  0.05501 
+F-statistic: 185.9 on 1 and 3176 DF,  p-value: < 2.2e-16
+
+> summary(lmod2)
+
+Call:
+lm(formula = PRICE ~ BATH, data = dataset)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-23844196  -1075861   -720761   -279672  63070859 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)   288534     106731   2.703   0.0069 ** 
+BATH          691113      32368  21.352   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 3927000 on 3176 degrees of freedom
+Multiple R-squared:  0.1255,	Adjusted R-squared:  0.1253 
+F-statistic: 455.9 on 1 and 3176 DF,  p-value: < 2.2e-16
+
+> summary(lmod3)
+
+Call:
+lm(formula = log10(PRICE) ~ log10(BEDS + BATH), data = dataset)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.33701 -0.22627 -0.07418  0.18893  1.78129 
+
+Coefficients:
+                   Estimate Std. Error t value Pr(>|t|)    
+(Intercept)         5.21200    0.01932  269.71   <2e-16 ***
+log10(BEDS + BATH)  1.12233    0.02602   43.13   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.3553 on 3176 degrees of freedom
+Multiple R-squared:  0.3694,	Adjusted R-squared:  0.3692 
+F-statistic:  1860 on 1 and 3176 DF,  p-value: < 2.2e-16
